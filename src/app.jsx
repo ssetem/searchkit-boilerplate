@@ -7,7 +7,7 @@ import {
 	Hits
 } from "searchkit";
 
-// require("./../styles/index.scss");
+require("./index.scss");
 
 const host = "https://d78cfb11f565e845000.qb0x.com/movies"
 const sk = new SearchkitManager(host, {
