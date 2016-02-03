@@ -14,18 +14,17 @@ const sk = new SearchkitManager(host, {
   multipleSearchers:false
 })
 
-class MovieHits extends Hits {
-	renderResult(result) {
-		let url = "http://www.imdb.com/title/" + result._source.imdbId
-		return (
-			<div className={this.bemBlocks.item().mix(this.bemBlocks.container("item"))} key={result._id}>
-				<a href={url} target="_blank">
-					<img className={this.bemBlocks.item("poster")} src={result._source.poster} width="180" height="270"/>
-					<div className={this.bemBlocks.item("title")}>{result._source.title}</div>
-				</a>
-			</div>
-		)
-	}
+const MovieHitsItem = (props)=> {
+	const {bemBlocks, result}= props
+	let url = "http://www.imdb.com/title/" + result._source.imdbId
+	return (
+		<div className={bemBlocks.item().mix(bemBlocks.container("item"))} key={result._id}>
+			<a href={url} target="_blank">
+				<img className={bemBlocks.item("poster")} src={result._source.poster} width="180" height="270"/>
+				<div className={bemBlocks.item("title")}>{result._source.title}</div>
+			</a>
+		</div>
+	)
 }
 
 export default class App extends React.Component {
@@ -39,12 +38,11 @@ export default class App extends React.Component {
 					</div>
 
 					<div className="search-site__results">
-						<MovieHits hitsPerPage={10}/>
+						<Hits hitsPerPage={10} itemComponent={MovieHitsItem}/>
 					</div>
 				</div>
 			</SearchkitProvider>
 		</div>
-
 		);
 	}
 }
