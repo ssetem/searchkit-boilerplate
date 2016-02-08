@@ -9,10 +9,8 @@ import {
 
 require("./index.scss");
 
-const host = "https://d78cfb11f565e845000.qb0x.com/movies"
-const sk = new SearchkitManager(host, {
-  multipleSearchers:false
-})
+const host = "http://demo.searchkit.co/api/movies"
+const sk = new SearchkitManager(host)
 
 const MovieHitsItem = (props)=> {
 	const {bemBlocks, result}= props
@@ -38,7 +36,7 @@ export default class App extends React.Component {
 					</div>
 
 					<div className="search-site__results">
-						<Hits hitsPerPage={10} itemComponent={MovieHitsItem}/>
+						<Hits hitsPerPage={10} itemComponent={MovieHitsItem} sourceFilter={["title", "poster", "imdbId"]}/>
 					</div>
 				</div>
 			</SearchkitProvider>
